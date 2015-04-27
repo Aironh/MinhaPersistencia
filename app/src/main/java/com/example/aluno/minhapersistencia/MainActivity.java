@@ -1,17 +1,18 @@
 package com.example.aluno.minhapersistencia;
 
+import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
 
     private DataBaseHelper helper;
-
 
 
     @Override
@@ -25,8 +26,16 @@ public class MainActivity extends ActionBarActivity {
     public void salvarPessoa(View v){
 
         SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("nome","Airon");
+        long id = db.insert("pessoa",null,values);
 
-    }
+        if(id != -1){
+            Toast.makeText(this,"Deu certo",Toast.LENGTH_LONG).show();
+
+        }else{
+            Toast.makeText(this,"Erro na gravação",Toast.LENGTH_LONG).show();
+        }
 
 
     @Override
